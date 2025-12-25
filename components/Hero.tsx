@@ -50,9 +50,9 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
             <span className="text-white text-[11px] font-black uppercase tracking-[0.4em] mr-[-0.4em]">Ente di Terzo Settore</span>
           </div>
 
-          {/* Main Title */}
+          {/* Main Title - Responsive Typography Fix */}
           <div className="relative mb-10">
-            <h1 className="text-5xl md:text-[10rem] font-display font-black text-white leading-[0.85] tracking-tighter animate-stagger-text uppercase">
+            <h1 className="text-5xl md:text-8xl lg:text-9xl xl:text-[10rem] font-display font-black text-white leading-[0.85] tracking-tighter animate-stagger-text uppercase">
               MOBY DICK <br />
               <span className="text-sky italic drop-shadow-2xl">ETS.</span>
             </h1>

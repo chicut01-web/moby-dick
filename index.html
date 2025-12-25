@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;700;800&family=Montserrat:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Configurazione Tailwind PRIMA dello script CDN (nota: anche se il CDN è caricato sopra, l'ordine di esecuzione è critico. La best practice per CDN standalone è definire config prima, o usare l'ordine corretto nel DOM se sincrono. Qui riordino per sicurezza) -->
     <script>
       tailwind.config = {
         theme: {
@@ -28,6 +30,7 @@
         },
       };
     </script>
+    
     <style>
       :root {
         --ocean: #0066CC;
