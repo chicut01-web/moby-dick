@@ -1,0 +1,8 @@
+{
+  "name": "Moby Dick ETS",
+  "description": "Un sito web moderno e professionale per Moby Dick ETS, un Ente di Terzo Settore dedicato alle politiche giovanili, empowerment e innovazione.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

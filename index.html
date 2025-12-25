@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moby Dick ETS | 20 Anni di Opportunità</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;700;800&family=Montserrat:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ocean: '#0066CC',
+              sky: '#00A3FF',
+              azure: '#EBF4FF',
+              navy: '#002855',
+              charcoal: '#0F172A',
+            },
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+              display: ['Montserrat', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :root {
+        --ocean: #0066CC;
+        --sky: #00A3FF;
+      }
+
+      /* Grain Texture Overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.05;
+        z-index: 9999;
+        pointer-events: none;
+      }
+
+      html { scroll-behavior: smooth; }
+      body { background-color: #FFFFFF; overflow-x: hidden; }
+
+      /* Animazione Reveal Ottimizzata per Lentezza e Fluidità */
+      .reveal {
+        opacity: 0;
+        transform: translateY(60px);
+        transition: opacity 1.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: transform, opacity;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .parallax-text {
+        position: absolute;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        font-size: 20vw;
+        color: rgba(0, 102, 204, 0.03);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .bento-card {
+        transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.8s ease;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 102, 204, 0.1);
+      }
+      .bento-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 40px 80px -20px rgba(0, 102, 204, 0.12);
+        border-color: var(--ocean);
+      }
+
+      .text-outline {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+        color: transparent;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+      }
+      .floating { animation: float 5s infinite ease-in-out; }
+
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .spin-slow { animation: spin-slow 15s linear infinite; }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+        "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+        "react": "https://esm.sh/react@^19.2.3",
+        "react/": "https://esm.sh/react@^19.2.3/"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+      }, { threshold: 0.1 });
+
+      const initReveal = () => {
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      };
+      
+      setInterval(initReveal, 1000);
+
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.parallax-scroll');
+        if (parallax) {
+          parallax.style.transform = `translateX(${scrolled * 0.1}px)`;
+        }
+      });
+    </script>
+  </body>
+</html>
