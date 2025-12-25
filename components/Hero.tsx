@@ -42,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
         </div>
       </div>
 
-      <div className="container mx-auto relative z-10 pt-20">
+      <div className="container mx-auto relative z-10 pt-32 md:pt-48">
         <div className="flex flex-col items-center text-center">
           {/* Tagline Badge */}
           <div className="inline-flex items-center gap-3 px-6 py-3 mb-8 border border-white/20 rounded-full bg-white/10 backdrop-blur-xl animate-slide-up shadow-2xl">
