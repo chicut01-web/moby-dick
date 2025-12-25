@@ -31,12 +31,12 @@ const StatCounter: React.FC<{ target: number; label: string; suffix?: string }> 
   }, [hasStarted, target]);
 
   return (
-    <div ref={ref} className="flex flex-col items-center justify-center p-8 md:p-10 group hover:bg-azure/50 transition-all duration-700 rounded-[3rem] w-full">
-      <div className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-charcoal mb-4 tracking-tighter group-hover:text-ocean group-hover:scale-110 transition-all duration-700 text-center w-full break-words leading-none">
+    <div ref={ref} className="flex flex-col items-center justify-center p-6 md:p-10 group hover:bg-azure/50 transition-all duration-700 rounded-[2.5rem] md:rounded-[3rem] w-full">
+      <div className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-black text-charcoal mb-2 md:mb-4 tracking-tighter group-hover:text-ocean group-hover:scale-110 transition-all duration-700 text-center w-full break-words leading-none">
         {count.toLocaleString('it-IT')}{suffix}
       </div>
       {/* Label with optical adjustment for tracking */}
-      <div className="text-ocean text-[10px] md:text-xs font-black uppercase tracking-[0.5em] inline-block mr-[-0.5em] text-center">
+      <div className="text-ocean text-[9px] md:text-[10px] md:text-xs font-black uppercase tracking-[0.3em] md:tracking-[0.5em] inline-block mr-[-0.3em] md:mr-[-0.5em] text-center">
         {label}
       </div>
     </div>
@@ -45,10 +45,10 @@ const StatCounter: React.FC<{ target: number; label: string; suffix?: string }> 
 
 const Statistics: React.FC = () => {
   return (
-    <div className="py-32 md:py-52 bg-white relative overflow-hidden">
+    <div className="py-20 md:py-32 lg:py-52 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-azure to-transparent"></div>
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-12">
           <StatCounter target={2005} label="FONDATA NEL" />
           <StatCounter target={20} label="ANNI DI STORIA" />
           <StatCounter target={150} label="PROGETTI" suffix="+" />

@@ -13,7 +13,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 md:px-6">
       {/* Background Image con Overlay Marino */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -24,7 +24,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-ocean/50 to-white"></div>
       </div>
 
-      {/* Anniversary Badge - Azzurro/Bianco */}
+      {/* Anniversary Badge - Nascosto su mobile per pulizia, visibile da lg in su */}
       <div className="absolute top-32 right-10 md:right-24 z-20 hidden lg:block animate-float">
         <div className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
           <svg className="w-full h-full spin-slow" viewBox="0 0 100 100">
@@ -42,37 +42,37 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
         </div>
       </div>
 
-      {/* Container Layout Compattato per Laptop */}
-      <div className="container mx-auto relative z-10 pt-24 md:pt-32">
+      {/* Container Layout */}
+      <div className="container mx-auto relative z-10 pt-28 md:pt-32">
         <div className="flex flex-col items-center text-center">
           {/* Tagline Badge */}
-          <div className="inline-flex items-center gap-3 px-5 py-2 mb-6 border border-white/20 rounded-full bg-white/10 backdrop-blur-xl animate-slide-up shadow-2xl">
-            <Sparkles size={14} className="text-sky" />
-            <span className="text-white text-[10px] font-black uppercase tracking-[0.3em] mr-[-0.3em]">Ente di Terzo Settore</span>
+          <div className="inline-flex items-center gap-2 md:gap-3 px-4 py-2 mb-4 md:mb-6 border border-white/20 rounded-full bg-white/10 backdrop-blur-xl animate-slide-up shadow-2xl">
+            <Sparkles size={12} className="text-sky" />
+            <span className="text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] mr-[-0.2em]">Ente di Terzo Settore</span>
           </div>
 
-          {/* Main Title - Spaziature ridotte */}
-          <div className="relative mb-6">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-[9rem] font-display font-black text-white leading-[0.9] tracking-tighter animate-stagger-text uppercase">
+          {/* Main Title - Responsive Typography Fix */}
+          <div className="relative mb-6 w-full">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[9rem] font-display font-black text-white leading-[0.95] md:leading-[0.9] tracking-tighter animate-stagger-text uppercase break-words">
               MOBY DICK <br />
               <span className="text-sky italic drop-shadow-2xl">ETS.</span>
             </h1>
-            <p className="text-lg md:text-3xl text-white/95 mt-6 max-w-4xl font-display font-bold italic tracking-tight animate-fade-in-delayed">
+            <p className="text-lg md:text-3xl text-white/95 mt-4 md:mt-6 max-w-4xl mx-auto font-display font-bold italic tracking-tight animate-fade-in-delayed px-4">
               "Un mare di opportunità per i giovani"
             </p>
           </div>
 
-          <p className="text-base md:text-lg text-white/90 mb-10 max-w-2xl font-medium leading-relaxed animate-fade-in-delayed drop-shadow-md">
+          <p className="text-sm md:text-lg text-white/90 mb-8 md:mb-10 max-w-xl md:max-w-2xl mx-auto font-medium leading-relaxed animate-fade-in-delayed drop-shadow-md px-4">
             Siamo un hub dinamico dedicato all'empowerment, alla cittadinanza attiva e all'innovazione sociale in ambito nazionale ed europeo.
           </p>
 
-          {/* Action Buttons - Animazione Immediata (NO DELAY) */}
-          <div className="flex flex-col sm:flex-row items-center gap-6 animate-appear-fast mb-16">
+          {/* Action Buttons - Stacked on mobile, row on desktop */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 animate-appear-fast mb-12 md:mb-16 w-full sm:w-auto px-6 sm:px-0">
             <button 
               onClick={() => scrollTo('chisiamo')}
-              className="group relative px-10 py-5 bg-white text-ocean rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(255,255,255,0.2)]"
+              className="w-full sm:w-auto group relative px-8 py-4 md:px-10 md:py-5 bg-white text-ocean rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(255,255,255,0.2)]"
             >
-              <span className="relative z-10 font-black flex items-center gap-3 uppercase text-xs">
+              <span className="relative z-10 font-black flex items-center justify-center gap-3 uppercase text-xs">
                 <span className="tracking-[0.2em] mr-[-0.2em]">SCOPRI ORA</span> 
                 <ArrowRight className="group-hover:translate-x-2 transition-transform text-ocean" />
               </span>
@@ -81,14 +81,14 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
             
             <button 
               onClick={() => scrollTo('progetti')}
-              className="px-10 py-5 bg-navy/60 backdrop-blur-md border border-white/30 text-white font-black text-xs uppercase rounded-2xl hover:bg-sky hover:border-sky transition-all flex items-center gap-3 group shadow-lg"
+              className="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 bg-navy/60 backdrop-blur-md border border-white/30 text-white font-black text-xs uppercase rounded-2xl hover:bg-sky hover:border-sky transition-all flex items-center justify-center gap-3 group shadow-lg"
             >
               <Waves size={18} className="group-hover:rotate-12 transition-transform text-sky group-hover:text-white" />
               <span className="tracking-[0.2em] mr-[-0.2em]">I NOSTRI PROGETTI</span>
             </button>
           </div>
 
-          {/* Partner Quick Logos */}
+          {/* Partner Quick Logos - Hidden on small mobile */}
           <div className="hidden md:flex items-center gap-12 opacity-80 hover:opacity-100 transition-opacity animate-fade-in-delayed">
             <span className="text-white/60 text-[9px] font-black uppercase tracking-widest border-r border-white/20 pr-12">Partner Istituzionali</span>
             <div className="flex gap-10">
@@ -102,7 +102,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
 
       {/* Wave Separator SVG */}
       <div className="absolute bottom-0 left-0 w-full leading-[0] z-20">
-        <svg className="relative block w-full h-[80px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <svg className="relative block w-full h-[60px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C57.23,103.19,136,117.22,218.41,114,260.5,112.39,290.5,103.1,321.39,56.44Z" fill="#FFFFFF"></path>
         </svg>
       </div>
@@ -119,12 +119,9 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
           from { opacity: 0; transform: translateY(60px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        /* Animazioni standard */
         .animate-slide-up { animation: slide-up 1.0s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
         .animate-stagger-text { opacity: 0; animation: slide-up 1.2s 0.2s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
         .animate-fade-in-delayed { opacity: 0; animation: slide-up 1.0s 0.3s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
-        
-        /* NUOVA ANIMAZIONE VELOCE PER I BOTTONI: Ritardo 0s, Durata 0.8s */
         .animate-appear-fast { opacity: 0; animation: slide-up 0.8s 0s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
       `}</style>
     </div>
