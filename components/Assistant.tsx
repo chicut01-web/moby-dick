@@ -33,9 +33,23 @@ const Assistant: React.FC = () => {
     setIsTyping(true);
 
     try {
-      // Inizializza la sessione di chat se non esiste
+      // Inizializza la sessione di chat se non esiste o se è stata resettata
       if (!chatSessionRef.current) {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        
+        // Controllo di sicurezza per l'API KEY
+        // Nota: Su Vercel devi aggiungere 'API_KEY' nelle Environment Variables del progetto.
+        let apiKey;
+        try {
+          apiKey = process.env.API_KEY;
+        } catch (e) {
+          console.error("Errore nell'accesso a process.env. Assicurati che il bundler esponga API_KEY.");
+        }
+
+        if (!apiKey) {
+          throw new Error("API Key mancante. Configura la variabile d'ambiente API_KEY su Vercel.");
+        }
+
+        const ai = new GoogleGenAI({ apiKey: apiKey });
         
         // Preparazione del contesto dati per l'AI (Grounding)
         const teamContext = TEAM.map(t => `${t.name} ricopre il ruolo di ${t.role}`).join('; ');
@@ -45,7 +59,7 @@ const Assistant: React.FC = () => {
         chatSessionRef.current = ai.chats.create({
           model: 'gemini-3-flash-preview',
           config: {
-            temperature: 0.3, // Alzata leggermente per fluidità, ma ancora bassa per precisione
+            temperature: 0.3, 
             systemInstruction: `Sei l'Assistente Ufficiale di Moby Dick ETS.
             
             CONTESTO:
@@ -63,7 +77,7 @@ const Assistant: React.FC = () => {
             REGOLE DI RISPOSTA (IMPORTANTE):
             1.  **Stile**: Usa un tono professionale, accogliente e caloroso. Non essere telegrafico.
             2.  **Lunghezza**: Rispondi in modo esaustivo ma conciso (circa 3-4 frasi). Spiega il "perché" o il contesto, non dare solo il dato secco.
-            3.  **Sul Team**: Se chiedono di una persona, cita il ruolo e aggiungi una frase di contesto sul valore del suo lavoro per l'associazione (es. "gestisce aspetti fondamentali per...", "coordina le attività con passione...").
+            3.  **Sul Team**: Se chiedono di una persona, cita il ruolo e aggiungi una frase di contesto sul valore del suo lavoro per l'associazione.
             4.  **Sui Progetti**: Descrivili con entusiasmo, sottolineando l'opportunità per i giovani.
             5.  **Ignoranza Ammessa**: Se un dato NON è nella lista sopra, di' gentilmente che non hai quell'informazione specifica e invita a contattare la segreteria a info@mobydickets.it.
             `,
@@ -71,14 +85,21 @@ const Assistant: React.FC = () => {
         });
       }
 
-      // Invia il messaggio alla sessione di chat esistente (che mantiene la storia)
+      // Invia il messaggio alla sessione di chat esistente
       const response = await chatSessionRef.current.sendMessage({ message: userMessage });
       
       const aiText = response.text || "Non ho capito bene, potresti riformulare la domanda?";
       setMessages(prev => [...prev, { role: 'assistant', content: aiText }]);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Errore chat:", error);
-      setMessages(prev => [...prev, { role: 'assistant', content: "C'è stato un piccolo problema tecnico. Prova a scriverci via email o ricarica la pagina!" }]);
+      
+      // Messaggio di errore user-friendly
+      let errorMessage = "C'è stato un piccolo problema tecnico. Prova a scriverci via email o ricarica la pagina!";
+      if (error.message && error.message.includes("API Key")) {
+        errorMessage = "Configurazione mancante: API Key non trovata. Contatta l'amministratore del sito.";
+      }
+      
+      setMessages(prev => [...prev, { role: 'assistant', content: errorMessage }]);
       // Resetta la sessione in caso di errore grave per riprovare pulito la prossima volta
       chatSessionRef.current = null;
     } finally {
